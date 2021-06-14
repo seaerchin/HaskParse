@@ -1,0 +1,66 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 9c8b0a270546af9aa80a2a7df80cb09b51c7884a3c3c1e0bfd01957fb704dc07
+
+name:           haskParse
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/haskParse#readme>
+homepage:       https://github.com/githubuser/haskParse#readme
+bug-reports:    https://github.com/githubuser/haskParse/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2021 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/githubuser/haskParse
+
+library
+  exposed-modules:
+      Lib
+      Text.Combinators.Base
+      Text.Combinators.List
+      Text.Parsers.Base
+      Text.Parsers.String
+  other-modules:
+      Paths_haskParse
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
+executable haskParse-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_haskParse
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , haskParse
+  default-language: Haskell2010
+
+test-suite haskParse-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_haskParse
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , haskParse
+  default-language: Haskell2010
