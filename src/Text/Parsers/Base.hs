@@ -4,7 +4,7 @@ module Text.Parsers.Base where
 import Control.Monad ((>=>))
 
 parseChar :: Char -> Parser Char
-parseChar c = Parser (\s -> if c == head s then Right (c, tail s) else Left ("No such character: " ++ [c]))
+parseChar c = Parser (\s -> if null s then Left "" else if c == head s then Right (c, tail s) else Left ("No such character: " ++ [c]))
 
 newtype Parser a = Parser (String -> Either String (a, String))
 
