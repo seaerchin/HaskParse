@@ -24,3 +24,24 @@ orElse first second =
           Right x -> Right x
           _ -> runParser second s
    in Parser combined
+
+-- tries the given parser at most once
+optional :: Parser a -> Parser (Maybe a)
+optional parser =
+  Parser
+    ( \input ->
+        let parserResult = runParser parser input
+         in case parserResult of
+              Left s -> Right (Nothing, input)
+              Right (res, rem) -> Right (Just res, rem)
+    )
+
+-- equivalent to >>
+ignore :: Parser a -> Parser b -> Parser b
+ignore = (>>)
+
+(<<) :: Parser a -> Parser b -> Parser a
+a << b = fmap fst $ a `andThen` b
+
+between :: Parser a -> Parser b -> Parser c -> Parser b
+between left payload right = left >> payload << right

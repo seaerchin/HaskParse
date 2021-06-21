@@ -2,7 +2,7 @@ module Text.Combinators.List where
 
 import Data.List.NonEmpty
 import Lib
-import Text.Combinators.Base (andThen, orElse)
+import Text.Combinators.Base (andThen, optional, orElse)
 import Text.Parsers.Base
 import Prelude hiding (head, map, tail)
 
@@ -44,3 +44,12 @@ many1 parser =
             let (result, remaining) = parseZeroOrMore parser input
              in Right (res : result, remaining)
     )
+
+-- Parses a string which is separated by 0 or more separators
+sepBy :: Parser a -> Parser b -> Parser [b]
+sepBy sep parser = many $ optional sep >> parser
+
+sepBy1 :: Parser a -> Parser b -> Parser [b]
+sepBy1 sep parser =
+  let parseManySep = many $ sep >> parser
+   in (:) <$> parser <*> parseManySep
